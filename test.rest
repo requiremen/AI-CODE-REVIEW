@@ -1,0 +1,96 @@
+### ─────────────────────────────────────
+### 1. SIGNUP
+### ─────────────────────────────────────
+POST http://localhost:3000/signup
+Content-Type: application/json
+
+{
+  "username": "akshat",
+  "password": "test123"
+}
+
+###
+
+### ─────────────────────────────────────
+### 2. SIGNIN
+### ─────────────────────────────────────
+POST http://localhost:3000/signin
+Content-Type: application/json
+
+{
+  "username": "akshat",
+  "password": "test123"
+}
+
+###
+
+### ─────────────────────────────────────
+### 3. SUBMIT CODE — first time (calls Gemini, saves to Redis)
+### fromCache should be FALSE
+### Replace token below with yours from signup/signin
+### ─────────────────────────────────────
+POST http://localhost:3000/review/submit
+Content-Type: application/json
+Authorization: Bearer your_token_here
+
+{
+  "language": "javascript",
+  "code": "function add(a,b){ return a+b } console.log(add(1,2))"
+}
+
+###
+
+### ─────────────────────────────────────
+### 4. SUBMIT SAME CODE AGAIN — should hit Redis cache
+### fromCache should be TRUE this time (no Gemini call)
+### ─────────────────────────────────────
+POST http://localhost:3000/review/submit
+Content-Type: application/json
+Authorization: Bearer your_token_here
+
+{
+  "language": "javascript",
+  "code": "function add(a,b){ return a+b } console.log(add(1,2))"
+}
+
+###
+
+### ─────────────────────────────────────
+### 5. SUBMIT BUGGY + INSECURE CODE
+### Gemini should catch eval, var, ==
+### ─────────────────────────────────────
+POST http://localhost:3000/review/submit
+Content-Type: application/json
+Authorization: Bearer your_token_here
+
+{
+  "language": "javascript",
+  "code": "var password = '1234'; function login(p) { if(p == password) { eval(p) } }"
+}
+
+###
+
+### ─────────────────────────────────────
+### 6. EMPTY CODE — should return 400
+### ─────────────────────────────────────
+POST http://localhost:3000/review/submit
+Content-Type: application/json
+Authorization: Bearer your_token_here
+
+{
+  "language": "javascript",
+  "code": ""
+}
+
+###
+
+### ─────────────────────────────────────
+### 7. NO TOKEN — should return 401
+### ─────────────────────────────────────
+POST http://localhost:3000/review/submit
+Content-Type: application/json
+
+{
+  "language": "javascript",
+  "code": "const x = 1"
+}
