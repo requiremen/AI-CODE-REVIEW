@@ -1,0 +1,78 @@
+/* Custom Scrollbar for code areas */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0F172A; 
+}
+::-webkit-scrollbar-thumb {
+    background: #334155; 
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #475569; 
+}
+
+/* Modal Animations */
+.modal-open {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+}
+
+/* Markdown Styles for AI Feedback */
+.feedback-content h1, .feedback-content h2, .feedback-content h3 {
+    color: #F8FAFC;
+    font-weight: 600;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.feedback-content h1 { font-size: 1.5rem; }
+.feedback-content h2 { font-size: 1.25rem; }
+.feedback-content h3 { font-size: 1.125rem; }
+
+.feedback-content p {
+    color: #CBD5E1;
+    margin-bottom: 1em;
+    line-height: 1.6;
+}
+
+.feedback-content ul, .feedback-content ol {
+    list-style-type: disc;
+    padding-left: 1.5em;
+    margin-bottom: 1em;
+    color: #CBD5E1;
+    line-height: 1.6;
+}
+
+.feedback-content pre {
+    background-color: #0F172A;
+    padding: 1.5em;
+    border-radius: 0.75rem;
+    overflow-x: auto;
+    margin-bottom: 1.5em;
+    margin-top: 1em;
+    border: 1px solid #334155;
+    box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+}
+
+.feedback-content code {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.875em;
+    color: #22C55E;
+    background: rgba(34, 197, 94, 0.1);
+    padding: 0.2em 0.4em;
+    border-radius: 0.25rem;
+}
+
+.feedback-content pre code {
+    color: #E2E8F0;
+    background: transparent;
+    padding: 0;
+}
+
+.feedback-content strong {
+    color: #F8FAFC;
+    font-weight: 600;
+}
